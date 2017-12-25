@@ -16,4 +16,5 @@ cache:
 after_success:
  - git add .
  - git commit -m "Build result [ci skip]"
+ - git remote set-url origin git@github.com:scarger/ReferME.git
  - git push origin HEAD:master
