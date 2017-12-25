@@ -16,27 +16,29 @@ import java.util.List;
 public abstract class SubCommand {
 
     private String name;
+    private String permission;
     private List<String> args;
     private boolean argLimit;
     private boolean onlyPlayer;
 
-    public SubCommand(String name, List<String> args, boolean argLimit, boolean onlyPlayer){
+    public SubCommand(String name, String permission, List<String> args, boolean argLimit, boolean onlyPlayer){
         this.name = name;
+        this.permission=permission;
         this.args = args;
         this.argLimit = argLimit;
         this.onlyPlayer = onlyPlayer;
     }
 
-    public SubCommand(String name, List<String> args, boolean argLimit){
-        this(name,args,argLimit,false);
+    public SubCommand(String name, String permission, List<String> args, boolean argLimit){
+        this(name,permission,args,argLimit,false);
     }
 
-    public SubCommand(String name, boolean onlyPlayer){
-        this(name,Arrays.asList("none"),false,onlyPlayer);
+    public SubCommand(String name, String permission, boolean onlyPlayer){
+        this(name,permission,Arrays.asList("none"),false,onlyPlayer);
     }
 
-    public SubCommand(String name){
-        this(name, Arrays.asList("none"),false,false);
+    public SubCommand(String name, String permission){
+        this(name,permission,Arrays.asList("none"),false,false);
     }
 
     public void runCmd(CommandSender sender, String[] fullArgs){
@@ -56,6 +58,10 @@ public abstract class SubCommand {
 
     public String getName(){
         return name;
+    }
+
+    public String getPermission(){
+        return permission;
     }
 
     public String getUsage(){

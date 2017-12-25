@@ -11,7 +11,8 @@ import org.bukkit.ChatColor;
 
 public enum  Const {
     
-    ISSUE_LINK("https://github.com/scarger/ReferME/issues");
+    ISSUE_LINK("https://github.com/scarger/ReferME/issues"),
+    NO_PERM(ChatColor.RED+"Insufficient permission");
 
     private String value;
 

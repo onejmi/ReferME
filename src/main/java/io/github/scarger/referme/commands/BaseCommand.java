@@ -19,6 +19,10 @@ public class BaseCommand implements CommandExecutor{
                 boolean hasCommand = false;
                 for (SubCommand cmd : ReferME.get().getCommands()) {
                     if (args[0].equalsIgnoreCase(cmd.getName())) {
+                        if(hasPermission(commandSender,cmd)){
+                            commandSender.sendMessage(Const.NO_PERM.getValue());
+                            break;
+                        }
                         cmd.runCmd(commandSender, args);
                         hasCommand = true;
                         break;
@@ -34,5 +38,12 @@ public class BaseCommand implements CommandExecutor{
         }
 
         return false;
+    }
+
+    private boolean hasPermission(CommandSender commandSender, SubCommand cmd){
+        return commandSender.hasPermission(cmd.getPermission())
+                || commandSender.hasPermission("referme.*")
+                || commandSender.hasPermission("*")
+                || commandSender.isOp();
     }
 }

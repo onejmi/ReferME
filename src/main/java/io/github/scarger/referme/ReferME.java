@@ -1,14 +1,15 @@
 package io.github.scarger.referme;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import io.github.scarger.referme.commands.SubCommand;
 import io.github.scarger.referme.interaction.ClickHandler;
 import io.github.scarger.referme.storage.ConfigurationStorage;
 import io.github.scarger.referme.storage.JsonStorage;
 import io.github.scarger.referme.storage.Storage;
+import io.github.scarger.referme.wrappers.PermissionsManager;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,10 @@ public class ReferME {
     private Storage storage;
     private ConfigurationStorage configurationStorage;
 
+    //vault/permissions
+    private boolean hasVault;
+    private PermissionsManager permissionsManager;
+
     private ReferME(){
         initStorage();
         //to add any updates from new versions
@@ -38,6 +43,17 @@ public class ReferME {
 
         clickHandlers = new ArrayList<>();
         commands = new ArrayList<>();
+
+        hasVault = setupPermissions();
+
+        if(hasVault){
+            Bukkit.getLogger().info(configurationStorage.getPrefix()+ChatColor.GREEN +
+                    "Successfully hooked into vault for permissions!");
+        }
+        else{
+            Bukkit.getLogger().info(configurationStorage.getPrefix()+ChatColor.RED +
+                    "Failed to locate vault. Some permission functionality may fail");
+        }
     }
 
     public static ReferME get(){
@@ -74,6 +90,12 @@ public class ReferME {
 
     }
 
+    private boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> rsp = Bukkit.getServicesManager().getRegistration(Permission.class);
+        permissionsManager = new PermissionsManager(rsp.getProvider());
+        return permissionsManager.getRaw() != null;
+    }
+
     private File getFile(String name, File folder){
         File file = new File(folder,name);
         if(!file.exists()){
@@ -108,5 +130,13 @@ public class ReferME {
 
     public List<ClickHandler> getClickHandlers(){
         return clickHandlers;
+    }
+
+    public boolean hasVault(){
+        return hasVault;
+    }
+
+    public PermissionsManager getPermissionsManager() {
+        return permissionsManager;
     }
 }

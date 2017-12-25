@@ -64,6 +64,15 @@ public class ReferralListener implements Listener {
                     ReferME.get().getConfig().getHourRequirement()+"hrs or more before having the ability to refer others");
             return false;
         }
+        else if(ReferME.get().hasVault()
+                && !ReferME.get().getPermissionsManager().has(referrer,"referme.refer")
+                && !ReferME.get().getPermissionsManager().has(referrer,"referme.*")
+                && !ReferME.get().getPermissionsManager().has(referrer,"*")
+                && !referrer.isOp()){
+            player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"That player doesn't have permission " +
+                    "to refer people on this system");
+            return false;
+        }
         return true;
     }
 

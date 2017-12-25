@@ -13,7 +13,7 @@ import java.util.List;
 public class ReferralsCmd extends SubCommand{
 
     public ReferralsCmd(){
-        super("referrals",true);
+        super("referrals","referme.referrals",true);
     }
 
     @Override

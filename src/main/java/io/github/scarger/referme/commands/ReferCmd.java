@@ -17,7 +17,7 @@ import java.util.*;
 public class ReferCmd extends SubCommand {
 
     public ReferCmd(){
-        super("refer",Arrays.asList("code"),true,true);
+        super("refer","referme.referral",Arrays.asList("code"),true,true);
     }
 
     @Override

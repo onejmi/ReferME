@@ -13,7 +13,7 @@ import java.util.List;
 public class HelpCmd extends SubCommand {
 
     public HelpCmd() {
-        super("help", Arrays.asList("page"),false);
+        super("help", "referme.help",Arrays.asList("page"),false);
     }
 
 

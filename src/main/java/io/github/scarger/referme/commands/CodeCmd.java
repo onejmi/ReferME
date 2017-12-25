@@ -16,7 +16,7 @@ import java.util.List;
 public class CodeCmd extends SubCommand {
 
     public CodeCmd(){
-        super("code",true);
+        super("code","referme.code",true);
     }
 
     @Override

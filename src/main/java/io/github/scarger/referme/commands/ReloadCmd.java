@@ -11,7 +11,7 @@ import java.util.List;
 public class ReloadCmd extends SubCommand {
 
     public ReloadCmd(){
-        super("reload",false);
+        super("reload","referme.admin",false);
     }
 
     @Override
