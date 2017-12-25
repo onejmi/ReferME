@@ -13,7 +13,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     
-    after_success:
-     - git add .
-     - git commit -m "Build result [ci skip]"
-     - git push
+after_success:
+ - git add .
+ - git commit -m "Build result [ci skip]"
+ - git push
