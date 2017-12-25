@@ -16,4 +16,4 @@ cache:
 after_success:
  - git add .
  - git commit -m "Build result [ci skip]"
- - git push
+ - git push origin HEAD:master
