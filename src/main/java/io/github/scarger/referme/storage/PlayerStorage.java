@@ -2,7 +2,6 @@ package io.github.scarger.referme.storage;
 
 import io.github.scarger.referme.ReferME;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 /**
@@ -21,7 +20,6 @@ public class PlayerStorage {
         return id;
     }
 
-    @Nullable
     public UUID getReferrer(){
         return referrer;
     }
