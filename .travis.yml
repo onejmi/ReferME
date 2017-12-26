@@ -2,7 +2,7 @@
 language: java
 
 before_install:
-#Make sure gradle wrapper is executable.
+#Make sure gradle wrapper is executable
  - chmod +x gradlew
 
 before_cache:
