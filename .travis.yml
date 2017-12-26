@@ -1,4 +1,4 @@
-#Testing the CI..
+#Running on java ofc
 language: java
 
 before_install:
@@ -20,6 +20,4 @@ after_success:
  - git config remote.origin.url https://scarger:$GIT_PASS@github.com/scarger/ReferME.git
  - git push origin HEAD:master
  #push result to dev server for further testing
- - curl -T build/libs/ReferME.jar -u $FTP_USER:$FTP_PASSWORD $DEV_HOST/plugins
- #testing p.
- - echo $PWD
+ - curl -T build/libs/ReferME.jar -u $FTP_USER:$FTP_PASSWORD $DEV_HOST/plugins/
