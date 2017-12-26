@@ -1,4 +1,4 @@
-#Setting the language
+#Running on java ofc
 language: java
 
 before_install:
