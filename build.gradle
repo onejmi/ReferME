@@ -34,3 +34,7 @@ processResources {
                      name: project.name, main: "${project.group}.Loader".toString()])
 }
 
+jar {
+    archiveName "ReferME.jar"
+}
+
