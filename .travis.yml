@@ -14,7 +14,10 @@ cache:
     - $HOME/.gradle/wrapper/
     
 after_success:
+#save result on git
  - git add -A
  - git commit -m "Build result [ci skip]"
  - git config remote.origin.url https://scarger:$GIT_PASS@github.com/scarger/ReferME.git
  - git push origin HEAD:master
+ #push result to dev server for further testing
+ - curl -T build/libs/ReferME.jar -u $FTP_USER:$FTP_PASSWORD $DEV_HOST/plugins
