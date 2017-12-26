@@ -14,7 +14,7 @@ cache:
     - $HOME/.gradle/wrapper/
     
 after_success:
- - git add .
+ - git add -A
  - git commit -m "Build result [ci skip]"
  - git remote set-url origin git@github.com:scarger/ReferME.git
- - git push origin HEAD:master
+ - printf "$GIT_USR\n$GIT_PASS" | git push origin HEAD:master
