@@ -16,5 +16,5 @@ cache:
 after_success:
  - git add -A
  - git commit -m "Build result [ci skip]"
- - git remote set-url origin git@github.com:scarger/ReferME.git
- - printf "$GIT_USR\n$GIT_PASS" | git push origin HEAD:master
+ - git config remote.origin.url https://scarger:$GIT_PASS@github.com/scarger/ReferME.git
+ - git push origin HEAD:master
