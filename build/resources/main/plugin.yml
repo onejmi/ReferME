@@ -1,6 +1,6 @@
 main: io.github.scarger.referme.Loader
-name: "ReferME"
-version: 1.0
+name: ReferME
+version: 1.0-SNAPSHOT
 softdepend: [Vault]
 commands:
     referme:
