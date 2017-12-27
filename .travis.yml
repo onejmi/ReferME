@@ -1,6 +1,10 @@
 #Running on java ofc
 language: java
 
+branches:
+  only:
+    - master  #sorry :PPP
+
 before_install:
 #Make sure gradle wrapper is executable
  - chmod +x gradlew
@@ -12,7 +16,7 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    
+
 after_success:
 #save result on git
  - git add -A
@@ -21,5 +25,5 @@ after_success:
  - git push origin HEAD:master
  #push result to dev server for further testing
  - curl -T build/libs/ReferME.jar -u $FTP_USER:$FTP_PASSWORD $DEV_HOST/plugins/
- if: branch = master #sorry :PPPP
+
 
