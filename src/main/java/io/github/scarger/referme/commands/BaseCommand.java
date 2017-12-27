@@ -19,8 +19,9 @@ public class BaseCommand implements CommandExecutor{
                 boolean hasCommand = false;
                 for (SubCommand cmd : ReferME.get().getCommands()) {
                     if (args[0].equalsIgnoreCase(cmd.getName())) {
-                        if(hasPermission(commandSender,cmd)){
+                        if(!hasPermission(commandSender,cmd)){
                             commandSender.sendMessage(Const.NO_PERM.getValue());
+                            hasCommand = true;
                             break;
                         }
                         cmd.runCmd(commandSender, args);
