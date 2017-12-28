@@ -6,7 +6,6 @@ import io.github.scarger.referme.storage.ConfigurationStorage;
 import io.github.scarger.referme.storage.JsonStorage;
 import io.github.scarger.referme.storage.Storage;
 import io.github.scarger.referme.wrappers.PermissionsManager;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -15,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarFile;
 
 /**
  * Created by Synch on 2017-10-14.
@@ -91,8 +91,7 @@ public class ReferME {
     }
 
     private boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = Bukkit.getServicesManager().getRegistration(Permission.class);
-        permissionsManager = new PermissionsManager(rsp.getProvider());
+        permissionsManager = new PermissionsManager("net.milkbowl.vault.permission.Permission");
         return permissionsManager.getRaw() != null;
     }
 
