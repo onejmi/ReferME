@@ -1,6 +1,7 @@
 package io.github.scarger.referme.storage;
 
 import com.google.gson.annotations.Since;
+import io.github.scarger.referme.storage.type.JsonSerializable;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by Synch on 2017-11-01.
  */
-public final class ConfigurationStorage {
+public final class ConfigurationStorage implements JsonSerializable{
     private @Since(0.1) String prefix;
     private @Since(0.1) boolean autoChange;
     private @Since(0.1) int hourRequirement;

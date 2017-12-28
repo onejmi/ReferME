@@ -5,16 +5,14 @@ import io.github.scarger.referme.interaction.ClickHandler;
 import io.github.scarger.referme.storage.ConfigurationStorage;
 import io.github.scarger.referme.storage.JsonStorage;
 import io.github.scarger.referme.storage.Storage;
-import io.github.scarger.referme.wrappers.PermissionsManager;
+import io.github.scarger.referme.management.PermissionsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarFile;
 
 /**
  * Created by Synch on 2017-10-14.
@@ -27,8 +25,8 @@ public class ReferME {
     //other vars..
     private List<SubCommand> commands;
     private List<ClickHandler> clickHandlers;
-    private JsonStorage jsonStorage;
-    private JsonStorage jsonConfiguration;
+    private JsonStorage.Wrapper jsonStorage;
+    private JsonStorage.Wrapper jsonConfiguration;
     private Storage storage;
     private ConfigurationStorage configurationStorage;
 
@@ -38,14 +36,11 @@ public class ReferME {
 
     private ReferME(){
         initStorage();
-        //to add any updates from new versions
-        jsonConfiguration.write(configurationStorage);
-
+        //collections..
         clickHandlers = new ArrayList<>();
         commands = new ArrayList<>();
-
+        //hook
         hasVault = setupPermissions();
-
         if(hasVault){
             Bukkit.getLogger().info(configurationStorage.getPrefix()+ChatColor.GREEN +
                     "Successfully hooked into vault for permissions!");
@@ -56,9 +51,14 @@ public class ReferME {
         }
     }
 
+    private boolean setupPermissions() {
+        permissionsManager = new PermissionsManager("net.milkbowl.vault.permission.Permission");
+        return permissionsManager.getRaw() != null;
+    }
+
     public static ReferME get(){
-        if(instance==null){
-            instance =new ReferME();
+        if(instance == null){
+            instance = new ReferME();
         }
         return instance;
     }
@@ -68,48 +68,16 @@ public class ReferME {
         if(!folder.exists()){
             folder.mkdirs();
         }
-
-        File jsonLoc = getFile("data.json",folder);
-        File confLoc = getFile("config.json",folder);
-
-        jsonStorage = new JsonStorage(jsonLoc);
-        jsonConfiguration = new JsonStorage(confLoc);
-
-        //empty?
-        if(jsonLoc.length()==0){ jsonStorage.write(new Storage());}
-
-        if(confLoc.length()==0) {
-            jsonConfiguration.write(new ConfigurationStorage());
-        }
-
-
+        //more init...
+        jsonStorage = new JsonStorage.Wrapper("data.json",Storage.class);
+        jsonConfiguration = new JsonStorage.Wrapper("config.json",ConfigurationStorage.class);
         //deserialize info...
-        storage = (Storage) jsonStorage.read(Storage.class);
-        configurationStorage = (ConfigurationStorage) jsonConfiguration.read(ConfigurationStorage.class);
-
-
-    }
-
-    private boolean setupPermissions() {
-        permissionsManager = new PermissionsManager("net.milkbowl.vault.permission.Permission");
-        return permissionsManager.getRaw() != null;
-    }
-
-    private File getFile(String name, File folder){
-        File file = new File(folder,name);
-        if(!file.exists()){
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return file;
+        storage = (Storage) jsonStorage.getStorageSection();
+        configurationStorage = (ConfigurationStorage) jsonConfiguration.getStorageSection();
     }
 
     public JsonStorage getJsonStorage() {
-        return jsonStorage;
+        return jsonStorage.getStorage();
     }
 
     public Storage getStorage(){
@@ -121,9 +89,6 @@ public class ReferME {
     }
 
     public List<SubCommand> getCommands(){
-        if(commands==null){
-            commands = new ArrayList<>();
-        }
         return commands;
     }
 

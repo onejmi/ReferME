@@ -1,4 +1,4 @@
-package io.github.scarger.referme.wrappers;
+package io.github.scarger.referme.interaction.menu;
 
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.storage.PlayerStorage;

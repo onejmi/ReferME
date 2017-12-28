@@ -4,7 +4,7 @@ import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.interaction.ClickHandler;
 import io.github.scarger.referme.interaction.MenuType;
 import io.github.scarger.referme.storage.PlayerStorage;
-import io.github.scarger.referme.wrappers.Referrals;
+import io.github.scarger.referme.interaction.menu.Referrals;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 

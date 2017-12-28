@@ -1,7 +1,7 @@
 package io.github.scarger.referme.commands;
 
 import io.github.scarger.referme.ReferME;
-import io.github.scarger.referme.wrappers.Referrals;
+import io.github.scarger.referme.interaction.menu.Referrals;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

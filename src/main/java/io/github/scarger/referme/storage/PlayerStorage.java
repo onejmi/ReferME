@@ -1,6 +1,7 @@
 package io.github.scarger.referme.storage;
 
 import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.storage.type.JsonSerializable;
 
 import java.util.UUID;
 

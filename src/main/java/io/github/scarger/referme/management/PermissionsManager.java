@@ -1,11 +1,10 @@
-package io.github.scarger.referme.wrappers;
+package io.github.scarger.referme.management;
 
 
 //import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 /**
