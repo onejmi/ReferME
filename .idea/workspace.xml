@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="32026865-3e93-4a42-ac3a-4d9f953f49f3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/ReferME.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/ReferME.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/wrappers/PermissionsManager.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/wrappers/PermissionsManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReferME.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReferME.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/ReferME.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-351">
-              <caret line="72" column="53" lean-forward="true" selection-start-line="72" selection-start-column="53" selection-end-line="72" selection-end-column="53" />
+            <state relative-caret-position="6">
+              <caret line="93" column="36" lean-forward="true" selection-start-line="93" selection-start-column="36" selection-end-line="93" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -115,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PermissionsManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PermissionsManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/wrappers/PermissionsManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+            <state relative-caret-position="203">
+              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -932,7 +931,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514340068578</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="dynamically hook into vault(so it can be a soft dep.)">
+      <created>1514472035008</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1514472035008</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1016,7 +1022,8 @@
     <MESSAGE value="abstracted jar name" />
     <MESSAGE value="fixed permission check" />
     <MESSAGE value="attempt to explicitly target master for deploy/after build" />
-    <option name="LAST_COMMIT_MESSAGE" value="attempt to explicitly target master for deploy/after build" />
+    <MESSAGE value="dynamically hook into vault(so it can be a soft dep.)" />
+    <option name="LAST_COMMIT_MESSAGE" value="dynamically hook into vault(so it can be a soft dep.)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1291,6 +1298,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="586">
           <caret line="621" column="58" lean-forward="false" selection-start-line="621" selection-start-column="58" selection-end-line="621" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1350,21 +1358,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/wrappers/PermissionsManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/ReferME.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-351">
-          <caret line="72" column="53" lean-forward="true" selection-start-line="72" selection-start-column="53" selection-end-line="72" selection-end-column="53" />
+        <state relative-caret-position="6">
+          <caret line="93" column="36" lean-forward="true" selection-start-line="93" selection-start-column="36" selection-end-line="93" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/wrappers/PermissionsManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
