@@ -22,7 +22,7 @@ public class PermissionsManager {
             this.permsClass = Class.forName(classLoc);
             rawPermission = Bukkit.getServer().getServicesManager().getRegistration(permsClass);
             hasVault = rawPermission!=null;
-        } 
+        }
         //no vault
         catch (ClassNotFoundException e) {
             hasVault = false;
