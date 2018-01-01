@@ -40,7 +40,7 @@ public class ReferralListener implements Listener {
 
         if(referrer.isOnline()){
             ((Player) referrer).sendMessage(PREFIX+ChatColor.LIGHT_PURPLE+player.getName()+ChatColor.AQUA +
-                    " has added you as his referral, congrats!");
+                    " has added you as their referral, congrats!");
 
         }
 
@@ -49,38 +49,55 @@ public class ReferralListener implements Listener {
     }
 
     private boolean isEligible(Player player, OfflinePlayer referrer){
+        boolean eligible = false;
+        boolean noPermission = ReferME.get().hasVault()
+                && !ReferME.get().getPermissionsManager().has(referrer,"referme.refer")
+                && !ReferME.get().getPermissionsManager().has(referrer,"referme.*")
+                && !ReferME.get().getPermissionsManager().has(referrer,"*")
+                && !referrer.isOp();
+
         StorageMap<UUID,PlayerStorage> players  = ReferME.get().getStorage().getPlayers();
+
         if(players.getRaw().get(player.getUniqueId()).isReferred()){
             player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"You have already been referred");
-           return false;
         }
         else if(player.getUniqueId().equals(players.getRaw().get(referrer.getUniqueId()).getReferrer())){
             player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"You can't refer someone who referred you");
-           return false;
         }
         else if(toHours(player.getStatistic(Statistic.PLAY_ONE_TICK))
                 <ReferME.get().getConfig().getHourRequirement()){
             player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"You must play for a total of " +
                     ReferME.get().getConfig().getHourRequirement()+"hrs or more before having the ability to refer others");
-            return false;
         }
-        else if(ReferME.get().hasVault()
-                && !ReferME.get().getPermissionsManager().has(referrer,"referme.refer")
-                && !ReferME.get().getPermissionsManager().has(referrer,"referme.*")
-                && !ReferME.get().getPermissionsManager().has(referrer,"*")
-                && !referrer.isOp()){
+        else if(noPermission){
             player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"That player doesn't have permission " +
-                    "to refer people on this system");
-            return false;
+                    "to refer players on this system");
         }
-        return true;
+        else{
+            eligible = true;
+        }
+
+        return eligible;
     }
 
     private void reward(Player player, OfflinePlayer referrer){
+        PlayerStorage referrerStorage = ReferME.get().getStorage().getPlayers().getRaw().get(referrer.getUniqueId());
+        //prepare commands and run
         ReferME.get().getConfig().getRewardCommands().stream()
                 .map(cmd -> cmd.replaceAll("%player%",player.getName()))
                 .map(cmd -> cmd.replaceAll("%referrer%",referrer.getName()))
                 .forEach(cmd -> Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), cmd));
+        //hit a milestone?
+        if(isAchievement(referrerStorage)){
+            ReferME.get().getConfig().getAchievements().get(referrerStorage.getReferrals()+1)
+                    .stream()
+                    .map(cmd -> cmd.replaceAll("%player%",referrer.getName()))
+                    .forEach(cmd -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),cmd));
+        }
+    }
+
+    private boolean isAchievement(PlayerStorage playerStorage){
+        return ReferME.get().getConfig().getAchievements().keySet().contains(playerStorage.getReferrals()+1);
     }
 
     private double toHours(int ticks){

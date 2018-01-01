@@ -2,8 +2,8 @@ package io.github.scarger.referme.commands;
 
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.events.ReferralEvent;
+import io.github.scarger.referme.storage.PlayerStorage;
 import io.github.scarger.referme.util.Const;
-import io.github.scarger.referme.util.RCommons;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -33,7 +33,7 @@ public class ReferCmd extends SubCommand {
         }
 
         if(ReferME.get().getStorage().getPlayers().getRaw().get(((Player) sender).getUniqueId()).getId() != idCode){
-            tryReferral(sender, idCode);
+            tryReferral(sender, ReferME.get().getStorage().getPlayers().getRaw().get((Player) sender));
         }
         else{
             sender.sendMessage(ReferME.get().getConfig().getPrefix()+ ChatColor.RED+"You can't refer yourself!");
@@ -47,9 +47,9 @@ public class ReferCmd extends SubCommand {
     }
 
 
-    private void tryReferral(CommandSender sender, int idCode){
+    private void tryReferral(CommandSender sender, PlayerStorage playerStorage){
         Player player = (Player) sender;
-        UUID referralUUID = RCommons.getKey(idCode);
+        UUID referralUUID = playerStorage.getUUID();
 
         if(referralUUID == null){
             sender.sendMessage(ReferME.get().getConfig().getPrefix()+ ChatColor.RED+"That id doesn't exist");

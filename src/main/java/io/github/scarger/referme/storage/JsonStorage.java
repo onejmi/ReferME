@@ -20,7 +20,7 @@ public class JsonStorage {
 
     JsonStorage(File output){
         this.output = output;
-        this.gsonInstance = new GsonBuilder().setVersion(0.1).setPrettyPrinting().create();
+        this.gsonInstance = new GsonBuilder().setVersion(1.0).setPrettyPrinting().create();
     }
 
     public synchronized boolean write(Object data){

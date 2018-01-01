@@ -3,33 +3,30 @@ package io.github.scarger.referme.util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.material.MaterialData;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
  * Created by Synch on 2017-11-15.
  */
-public class StackBuilder {
+public class ItemStackBuilder {
 
     private ItemStack itemStack;
     private ItemMeta meta;
 
-    public StackBuilder(Material material){
+    public ItemStackBuilder(Material material){
         this.itemStack = new ItemStack(material);
     }
 
-    public StackBuilder id(short id){
+    public ItemStackBuilder id(short id){
         itemStack.setDurability(id);
         return this;
     }
 
-    public StackBuilder name(String name){
+    public ItemStackBuilder name(String name){
         getMeta().setDisplayName(ChatColor.translateAlternateColorCodes('&',name));
         return this;
     }

@@ -7,25 +7,27 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Synch on 2017-12-24.
  */
 public class PermissionsManager {
 
     private RegisteredServiceProvider<?> rawPermission;
-    private Class permsClass;
-    private boolean hasVault;
+    private Map<String,Method> methodCache;
 
     public PermissionsManager(String classLoc){
+        methodCache = new HashMap<>();
         try {
-            this.permsClass = Class.forName(classLoc);
+            Class<?> permsClass = Class.forName(classLoc);
             rawPermission = Bukkit.getServer().getServicesManager().getRegistration(permsClass);
-            hasVault = rawPermission!=null;
+            methodCache.put("hasOffline",permsClass.getDeclaredMethod("has",World.class,OfflinePlayer.class,String.class));
         }
         //no vault
-        catch (ClassNotFoundException e) {
-            hasVault = false;
-        }
+        catch (Exception e) {/*goto ReferME for message*/}
     }
 
     public RegisteredServiceProvider<?> getRaw() {
@@ -34,8 +36,7 @@ public class PermissionsManager {
 
     public boolean has(OfflinePlayer offlinePlayer, String permission){
         try {
-            return (boolean) permsClass.getClass()
-                    .getDeclaredMethod("has", World.class, OfflinePlayer.class, String.class)
+            return (boolean) methodCache.get("hasOffline")
                     .invoke(rawPermission.getProvider(),
                             Bukkit.getServer().getWorlds().get(0).getName(),
                             offlinePlayer,

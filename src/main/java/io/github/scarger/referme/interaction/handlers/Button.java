@@ -15,7 +15,5 @@ public class Button extends ClickHandler {
     }
 
     @Override
-    public void handle(Player player, Inventory inventory) {
-
-    }
+    public void handle(Player player, Inventory inventory) {/*nothing special here*/}
 }
