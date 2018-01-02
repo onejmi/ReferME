@@ -8,7 +8,7 @@ import io.github.scarger.referme.listeners.ClickListener;
 import io.github.scarger.referme.listeners.JoinListener;
 import io.github.scarger.referme.listeners.ReferralListener;
 import io.github.scarger.referme.storage.watch.Watcher;
-import io.github.scarger.referme.util.Const;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,7 +36,8 @@ public final class Loader extends JavaPlugin{
     }
 
     public void onDisable(){
-        getLogger().info("Thanks for using me, please report all bugs ".concat(Const.ISSUE_LINK.getValue()));
+        getLogger().info("Thanks for using ReferME, please report all bugs @ " +
+                ChatColor.AQUA+"https://github.com/scarger/ReferME/issues");
         //terminate watcher
         watcher.close();
         //save storage from memory

@@ -2,7 +2,6 @@ package io.github.scarger.referme.commands;
 
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.framework.PluginInjected;
-import io.github.scarger.referme.util.Const;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
