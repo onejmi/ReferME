@@ -91,15 +91,6 @@ public class Referrals extends PluginInjected {
                 .collect(Collectors.toList());
     }
 
-    private UUID toUUID(int value){
-        for(Map.Entry<UUID,PlayerStorage> entry : getPlugin().getStorage().getPlayers().getRaw().entrySet()){
-            if(entry.getValue().getId() == value){
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
     public Inventory getResult(){
         return inventory;
     }

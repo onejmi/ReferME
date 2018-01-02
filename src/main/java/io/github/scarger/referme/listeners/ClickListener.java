@@ -24,7 +24,7 @@ public class ClickListener extends PluginInjected implements Listener {
     public void onClick(InventoryClickEvent event){
         String inventoryName = event.getInventory().getName();
 
-        if(delegate(new Button(filter(inventoryName),event.getSlot()),
+        if(delegate(new Button(getPlugin(),filter(inventoryName),event.getSlot()),
                 (Player) event.getWhoClicked(), event.getClickedInventory())){
             event.setCancelled(true);
         }
