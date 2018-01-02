@@ -31,9 +31,6 @@ public class ClickListener extends PluginInjected implements Listener {
         else if(!(filter(inventoryName).equals(MenuType.NON))){
             event.setCancelled(true);
         }
-
-
-
     }
 
     private MenuType filter(String inventoryName){

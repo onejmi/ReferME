@@ -25,7 +25,7 @@ public class BaseCommand extends PluginInjected implements CommandExecutor{
                 for (SubCommand cmd : getPlugin().getCommands()) {
                     if (args[0].equalsIgnoreCase(cmd.getName())) {
                         if(!hasPermission(commandSender,cmd)){
-                            commandSender.sendMessage(Const.NO_PERM.getValue());
+                            commandSender.sendMessage(getPlugin().getConfig().getMessages().get("no-permission"));
                             hasCommand = true;
                             break;
                         }

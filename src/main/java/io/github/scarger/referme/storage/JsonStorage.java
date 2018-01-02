@@ -5,12 +5,12 @@ import com.google.gson.GsonBuilder;
 import io.github.scarger.referme.Loader;
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.framework.PluginInjected;
+import io.github.scarger.referme.message.MessageDefault;
 import io.github.scarger.referme.storage.type.JsonSerializable;
-import org.bukkit.Bukkit;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+
 
 /**
  * Created by Synch on 2017-10-24.
@@ -77,6 +77,10 @@ public class JsonStorage {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+            else if(storageClass.isAssignableFrom(ConfigurationStorage.class)){
+                getStorage().write(MessageDefault
+                        .updateMessageStructure((ConfigurationStorage) getStorageSection()));
             }
         }
 
