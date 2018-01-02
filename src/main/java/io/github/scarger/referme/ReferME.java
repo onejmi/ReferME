@@ -74,6 +74,8 @@ public class ReferME {
         //deserialize info...
         storage = (Storage) jsonStorage.getStorageSection();
         configurationStorage = (ConfigurationStorage) jsonConfiguration.getStorageSection();
+        //throw updated version on disk (in case of one)
+        jsonConfiguration.getStorage().write(configurationStorage);
     }
 
     public JsonStorage getJsonStorage() {
