@@ -1,17 +1,20 @@
 package io.github.scarger.referme.interaction;
 
+import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 /**
  * Created by Synch on 2017-11-18.
  */
-public abstract class ClickHandler {
+public abstract class ClickHandler extends PluginInjected {
 
     private MenuType type;
     private int slot;
 
-    public ClickHandler(MenuType type , int slot){
+    public ClickHandler(ReferME plugin, MenuType type , int slot){
+        super(plugin);
         this.type = type;
         this.slot = slot;
     }

@@ -1,7 +1,7 @@
 package io.github.scarger.referme.storage;
 
 import io.github.scarger.referme.ReferME;
-import io.github.scarger.referme.storage.type.JsonSerializable;
+import io.github.scarger.referme.framework.PluginInjected;
 
 import java.util.Map;
 import java.util.UUID;
@@ -9,13 +9,15 @@ import java.util.UUID;
 /**
  * Created by Synch on 2017-10-29.
  */
-public class PlayerStorage {
+public class PlayerStorage extends PluginInjected {
 
     private int id;
     private UUID referrer;
+    //non serializable members
     private transient UUID uuid;
 
-    public PlayerStorage(int id){
+    public PlayerStorage(ReferME plugin, int id){
+        super(plugin);
         this.id = id;
     }
 
@@ -33,12 +35,12 @@ public class PlayerStorage {
 
     public void setReferrer(UUID referrer){
         this.referrer = referrer;
-        ReferME.get().getJsonStorage().write(ReferME.get().getStorage());
+        getPlugin().getJsonStorage().write(getPlugin().getStorage());
     }
 
     public UUID getUUID(){
         if(uuid==null) {
-            for (Map.Entry<UUID, PlayerStorage> entry : ReferME.get().getStorage().getPlayers().getRaw().entrySet()) {
+            for (Map.Entry<UUID, PlayerStorage> entry : getPlugin().getStorage().getPlayers().getRaw().entrySet()) {
                 if (entry.getValue().getId() == id) {
                     this.uuid=entry.getKey();
                     return entry.getKey();
@@ -53,7 +55,7 @@ public class PlayerStorage {
 
     public int getReferrals(){
         int referralCount = 0;
-        for(PlayerStorage playerStorage : ReferME.get().getStorage().getPlayers().getRaw().values()){
+        for(PlayerStorage playerStorage : getPlugin().getStorage().getPlayers().getRaw().values()){
             if(playerStorage.getReferrer().equals(getUUID())){
                 referralCount++;
             }

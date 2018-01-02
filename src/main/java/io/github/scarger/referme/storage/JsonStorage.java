@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.scarger.referme.Loader;
 import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 import io.github.scarger.referme.storage.type.JsonSerializable;
 import org.bukkit.Bukkit;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by Synch on 2017-10-24.
@@ -42,12 +45,14 @@ public class JsonStorage {
         }
     }
 
-    public static class Wrapper {
+    public static class Wrapper extends PluginInjected {
         private File file;
         private JsonStorage storage;
         private Class<? extends JsonSerializable> storageClass;
 
-        public Wrapper(String fileName, File folder, Class<? extends JsonSerializable> storageClass){
+        public Wrapper(ReferME plugin, String fileName,
+                       File folder, Class<? extends JsonSerializable> storageClass){
+            super(plugin);
             this.file = getFile(fileName,folder);
             this.storage = new JsonStorage(file);
             this.storageClass = storageClass;
@@ -55,15 +60,21 @@ public class JsonStorage {
             populate();
         }
 
-        public Wrapper(String fileName, Class<? extends JsonSerializable> storageClass){
-            this(fileName, Loader.getPlugin(Loader.class).getDataFolder(),storageClass);
+        public Wrapper(ReferME plugin, String fileName, Class<? extends JsonSerializable> storageClass){
+            this(plugin,fileName, Loader.getPlugin(Loader.class).getDataFolder(),storageClass);
         }
 
         private void populate(){
             if(file.length()==0){
                 try {
-                    storage.write(storageClass.newInstance());
-                } catch (InstantiationException | IllegalAccessException e) {
+                    if(storageClass.isAssignableFrom(Storage.class)){
+                        Constructor<Storage> storageConstructor = Storage.class.getConstructor(ReferME.class);
+                        storage.write(storageConstructor.newInstance(getPlugin()));
+                    }
+                    else {
+                        storage.write(storageClass.newInstance());
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

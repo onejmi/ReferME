@@ -1,6 +1,7 @@
 package io.github.scarger.referme.commands;
 
 import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 import io.github.scarger.referme.util.Const;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,7 +10,11 @@ import org.bukkit.command.CommandSender;
 /**
  * Created by Synch on 2017-10-14.
  */
-public class BaseCommand implements CommandExecutor{
+public class BaseCommand extends PluginInjected implements CommandExecutor{
+
+    public BaseCommand(ReferME plugin) {
+        super(plugin);
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
@@ -17,7 +22,7 @@ public class BaseCommand implements CommandExecutor{
         if(label.equalsIgnoreCase("referme")){
             if(args.length>=1) {
                 boolean hasCommand = false;
-                for (SubCommand cmd : ReferME.get().getCommands()) {
+                for (SubCommand cmd : getPlugin().getCommands()) {
                     if (args[0].equalsIgnoreCase(cmd.getName())) {
                         if(!hasPermission(commandSender,cmd)){
                             commandSender.sendMessage(Const.NO_PERM.getValue());
@@ -30,11 +35,11 @@ public class BaseCommand implements CommandExecutor{
                     }
                 }
                 if(!hasCommand){
-                    commandSender.sendMessage(ReferME.get().getConfig().getPrefix()+"Not quite? Use /referme help");
+                    commandSender.sendMessage(getPlugin().getConfig().getPrefix()+"Not quite? Use /referme help");
                 }
             }
             else{
-                commandSender.sendMessage(ReferME.get().getConfig().getPrefix()+"/referme help");
+                commandSender.sendMessage(getPlugin().getConfig().getPrefix()+"/referme help");
             }
         }
 

@@ -12,15 +12,15 @@ import java.util.List;
  */
 public class HelpCmd extends SubCommand {
 
-    public HelpCmd() {
-        super("help", "referme.help",Arrays.asList("page"),false);
+    public HelpCmd(ReferME plugin) {
+        super(plugin,"help", "referme.help",Arrays.asList("page"),false);
     }
 
 
     @Override
     void run(CommandSender sender, List<String> args) {
         int page = 1;
-        int totalPages = ((int) Math.floor(ReferME.get().getCommands().size()/7))+1;
+        int totalPages = ((int) Math.floor(getPlugin().getCommands().size()/7))+1;
         if(args.size()>=1){
             try {
                 page = Integer.parseInt(args.get(0));
@@ -37,7 +37,7 @@ public class HelpCmd extends SubCommand {
 
         //only one page? Just print all the commands in that scenario.
         if(totalPages<=1) {
-            ReferME.get().getCommands().forEach(cmd -> showCommand(cmd,sender));
+            getPlugin().getCommands().forEach(cmd -> showCommand(cmd,sender));
         }
         else{
             //loop through all commands corresponding to the page, print(help formatted message)
@@ -45,7 +45,7 @@ public class HelpCmd extends SubCommand {
             int endIndex = startIndex+6;
 
             for(int cmd = (page-1)*7; cmd<=endIndex; cmd++){
-                showCommand(ReferME.get().getCommands().get(cmd),sender);
+                showCommand(getPlugin().getCommands().get(cmd),sender);
             }
 
         }

@@ -1,6 +1,7 @@
 package io.github.scarger.referme.storage.type;
 
 import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +9,11 @@ import java.util.Map;
 /**
  * Created by Synch on 2017-11-05.
  */
-public class StorageMap<K,V> {
+public class StorageMap<K,V> extends PluginInjected{
     private Map<K,V> rawMap;
 
-    public StorageMap(){
+    public StorageMap(ReferME plugin){
+        super(plugin);
         rawMap = new HashMap<>();
     }
 
@@ -30,6 +32,6 @@ public class StorageMap<K,V> {
     }
 
     private void save(){
-        ReferME.get().getJsonStorage().write(ReferME.get().getStorage());
+        getPlugin().getJsonStorage().write(getPlugin().getStorage());
     }
 }

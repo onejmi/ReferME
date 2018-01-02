@@ -1,6 +1,7 @@
 package io.github.scarger.referme.interaction.menu;
 
 import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 import io.github.scarger.referme.storage.PlayerStorage;
 import io.github.scarger.referme.storage.type.StorageMap;
 import io.github.scarger.referme.util.ItemStackBuilder;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Synch on 2017-11-15.
  */
-public class Referrals {
+public class Referrals extends PluginInjected {
 
     private Inventory inventory;
     private final PlayerStorage playerStorage;
@@ -32,7 +33,8 @@ public class Referrals {
     private final List<PlayerStorage> referredPlayers;
     private final int page;
 
-    public Referrals(PlayerStorage playerStorage, int page){
+    public Referrals(ReferME plugin, PlayerStorage playerStorage, int page){
+        super(plugin);
         this.playerStorage = playerStorage;
         this.page = page;
         this.referredPlayers = getReferred();
@@ -73,7 +75,7 @@ public class Referrals {
     private List<PlayerStorage> getReferred(){
         List<PlayerStorage> referredPlayers = new ArrayList<>();
 
-        StorageMap<UUID,PlayerStorage> players = ReferME.get().getStorage().getPlayers();
+        StorageMap<UUID,PlayerStorage> players = getPlugin().getStorage().getPlayers();
         players.getRaw().values().
                 forEach(p -> {
                     PlayerStorage referred = players.getRaw().get(p.getReferrer());
@@ -90,7 +92,7 @@ public class Referrals {
     }
 
     private UUID toUUID(int value){
-        for(Map.Entry<UUID,PlayerStorage> entry : ReferME.get().getStorage().getPlayers().getRaw().entrySet()){
+        for(Map.Entry<UUID,PlayerStorage> entry : getPlugin().getStorage().getPlayers().getRaw().entrySet()){
             if(entry.getValue().getId() == value){
                 return entry.getKey();
             }

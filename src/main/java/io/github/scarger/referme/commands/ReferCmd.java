@@ -16,8 +16,8 @@ import java.util.*;
  */
 public class ReferCmd extends SubCommand {
 
-    public ReferCmd(){
-        super("refer","referme.referral",Arrays.asList("code"),true,true);
+    public ReferCmd(ReferME plugin){
+        super(plugin,"refer","referme.referral",Arrays.asList("code"),true,true);
     }
 
     @Override
@@ -28,15 +28,15 @@ public class ReferCmd extends SubCommand {
             idCode = Integer.parseInt(args.get(0));
         }
         catch (NumberFormatException e){
-            sender.sendMessage(ReferME.get().getConfig().getPrefix()+ ChatColor.RED+"Please specify a valid integer as the id");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"Please specify a valid integer as the id");
             return;
         }
 
-        if(ReferME.get().getStorage().getPlayers().getRaw().get(((Player) sender).getUniqueId()).getId() != idCode){
-            tryReferral(sender, ReferME.get().getStorage().getPlayers().getRaw().get((Player) sender));
+        if(getPlugin().getStorage().getPlayers().getRaw().get(((Player) sender).getUniqueId()).getId() != idCode){
+            tryReferral(sender, getPlugin().getStorage().getPlayers().getRaw().get((Player) sender));
         }
         else{
-            sender.sendMessage(ReferME.get().getConfig().getPrefix()+ ChatColor.RED+"You can't refer yourself!");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"You can't refer yourself!");
         }
 
     }
@@ -52,7 +52,7 @@ public class ReferCmd extends SubCommand {
         UUID referralUUID = playerStorage.getUUID();
 
         if(referralUUID == null){
-            sender.sendMessage(ReferME.get().getConfig().getPrefix()+ ChatColor.RED+"That id doesn't exist");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"That id doesn't exist");
             return;
         }
 
@@ -69,7 +69,7 @@ public class ReferCmd extends SubCommand {
 
     //saving method(to lower clutter..)
     private void saveReferral(UUID playerUUID, UUID referralUUID){
-        ReferME.get().getStorage().getPlayers()
+        getPlugin().getStorage().getPlayers()
                 .getRaw().get(playerUUID).setReferrer(referralUUID);
     }
 }

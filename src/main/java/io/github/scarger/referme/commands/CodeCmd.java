@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class CodeCmd extends SubCommand {
 
-    public CodeCmd(){
-        super("code","referme.code",true);
+    public CodeCmd(ReferME plugin){
+        super(plugin,"code","referme.code",true);
     }
 
     @Override
     void run(CommandSender sender, List<String> args) {
-        sender.sendMessage(ReferME.get().getConfig().getPrefix()+" Grabbing...");
-        sender.sendMessage(ReferME.get().getConfig().getPrefix()+"Your ID number is: " + ChatColor.GREEN + getId(sender));
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+" Grabbing...");
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+"Your ID number is: " + ChatColor.GREEN + getId(sender));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CodeCmd extends SubCommand {
         if(!(sender instanceof Player)) return 0;
         Player player = (Player) sender;
 
-        return ReferME.get().getStorage().getPlayers()
+        return getPlugin().getStorage().getPlayers()
                 .getRaw().get(player.getUniqueId()).getId();
     }
 }

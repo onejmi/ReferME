@@ -1,24 +1,25 @@
 package io.github.scarger.referme.storage.watch;
 
 import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.concurrent.TimeUnit;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
 /**
  * Created by Synch on 2017-11-05.
  */
-public class WatchLoop implements Runnable {
+public class WatchLoop extends PluginInjected implements Runnable {
 
     private Path path;
 
-    WatchLoop(Path path){
+    WatchLoop(ReferME plugin, Path path){
+        super(plugin);
         this.path = path;
     }
 
@@ -33,7 +34,7 @@ public class WatchLoop implements Runnable {
             System.out.println("DEBUG: "+path.toString());
             while (true) {
                 try {
-                    if (ReferME.get().getConfig().isAutoChange()) {
+                    if (getPlugin().getConfig().isAutoChange()) {
 
                         key = service.take();
                         WatchEvent.Kind<?> kind;
@@ -42,7 +43,7 @@ public class WatchLoop implements Runnable {
                             kind = watchEvent.kind();
                             if (ENTRY_MODIFY == kind || ENTRY_DELETE == kind) {
                                 System.out.println("Change found, reloading...");
-                                ReferME.get().initStorage();
+                                getPlugin().initStorage();
                             }
                         }
                         if (!key.reset()) {

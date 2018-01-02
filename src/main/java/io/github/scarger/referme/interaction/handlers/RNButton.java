@@ -12,17 +12,17 @@ import org.bukkit.inventory.Inventory;
  * Created by Synch on 2017-11-18.
  */
 public class RNButton extends ClickHandler {
-    public RNButton() {
-        super(MenuType.REFERRALS, 17);
+    public RNButton(ReferME plugin) {
+        super(plugin,MenuType.REFERRALS, 17);
     }
 
     @Override
     public void handle(Player player, Inventory inventory) {
-        PlayerStorage playerStorage = ReferME.get().getStorage().getPlayers().getRaw().get(player.getUniqueId());
+        PlayerStorage playerStorage = getPlugin().getStorage().getPlayers().getRaw().get(player.getUniqueId());
 
         int page = getNumber(inventory.getName())>49 ? 50 : getNumber(inventory.getName())+1;
 
-        player.openInventory(new Referrals(playerStorage,page).getResult());
+        player.openInventory(new Referrals(getPlugin(),playerStorage,page).getResult());
     }
 
     private int getNumber(String inventoryName){

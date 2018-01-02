@@ -1,27 +1,25 @@
 package io.github.scarger.referme.storage.watch;
 
-import io.github.scarger.referme.Loader;
-import org.bukkit.Bukkit;
-import org.bukkit.event.Cancellable;
+import io.github.scarger.referme.ReferME;
+import io.github.scarger.referme.framework.PluginInjected;
 
-import java.io.IOException;
 import java.nio.file.*;
-import java.util.Arrays;
 
 /**
  * Created by Synch on 2017-11-05.
  */
-public class Watcher{
+public class Watcher extends PluginInjected{
 
     private Path path;
     private Thread watchThread;
 
-    public Watcher(String path){
+    public Watcher(ReferME plugin, String path){
+        super(plugin);
         this.path = Paths.get(path);
     }
 
     public void start() {
-        this.watchThread = new Thread(new WatchLoop(path));
+        this.watchThread = new Thread(new WatchLoop(getPlugin(),path));
         watchThread.start();
     }
 

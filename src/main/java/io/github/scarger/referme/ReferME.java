@@ -19,9 +19,6 @@ import java.util.List;
  */
 public class ReferME {
 
-    //global instance var
-    private static ReferME instance;
-
     //other vars..
     private List<SubCommand> commands;
     private List<ClickHandler> clickHandlers;
@@ -34,7 +31,7 @@ public class ReferME {
     private boolean hasVault;
     private PermissionsManager permissionsManager;
 
-    private ReferME(){
+    protected ReferME(){
         initStorage();
         //collections..
         clickHandlers = new ArrayList<>();
@@ -56,21 +53,14 @@ public class ReferME {
         return permissionsManager.getRaw() != null;
     }
 
-    public static ReferME get(){
-        if(instance == null){
-            instance = new ReferME();
-        }
-        return instance;
-    }
-
     public void initStorage(){
         File folder = Loader.getPlugin(Loader.class).getDataFolder();
         if(!folder.exists()){
             folder.mkdirs();
         }
         //more init...
-        jsonStorage = new JsonStorage.Wrapper("data.json",Storage.class);
-        jsonConfiguration = new JsonStorage.Wrapper("config.json",ConfigurationStorage.class);
+        jsonStorage = new JsonStorage.Wrapper(this,"data.json",Storage.class);
+        jsonConfiguration = new JsonStorage.Wrapper(this,"config.json",ConfigurationStorage.class);
         //deserialize info...
         storage = (Storage) jsonStorage.getStorageSection();
         configurationStorage = (ConfigurationStorage) jsonConfiguration.getStorageSection();

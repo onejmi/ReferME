@@ -10,15 +10,15 @@ import java.util.List;
  */
 public class ReloadCmd extends SubCommand {
 
-    public ReloadCmd(){
-        super("reload","referme.admin",false);
+    public ReloadCmd(ReferME plugin){
+        super(plugin,"reload","referme.admin",false);
     }
 
     @Override
     void run(CommandSender sender, List<String> args) {
-        sender.sendMessage(ReferME.get().getConfig().getPrefix()+"Reloading...");
-        ReferME.get().initStorage();
-        sender.sendMessage(ReferME.get().getConfig().getPrefix()+ ChatColor.GREEN+"Successfully reloaded plugin");
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+"Reloading...");
+        getPlugin().initStorage();
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.GREEN+"Successfully reloaded plugin");
     }
 
     @Override

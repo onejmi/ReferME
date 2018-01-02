@@ -2,6 +2,7 @@ package io.github.scarger.referme.listeners;
 
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.events.ReferralEvent;
+import io.github.scarger.referme.framework.PluginInjected;
 import io.github.scarger.referme.storage.PlayerStorage;
 import io.github.scarger.referme.storage.type.StorageMap;
 import org.bukkit.Bukkit;
@@ -14,19 +15,20 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 
-import java.sql.Ref;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Created by Synch on 2017-10-29.
  */
-public class ReferralListener implements Listener {
+public class ReferralListener extends PluginInjected implements Listener{
+
+    public ReferralListener(ReferME plugin) {
+        super(plugin);
+    }
 
     @EventHandler (priority = EventPriority.LOWEST) //make sure users of api can override what's done here
     public void onReferral(ReferralEvent event){
-        final String PREFIX = ReferME.get().getConfig().getPrefix();
+        final String PREFIX = getPlugin().getConfig().getPrefix();
         Player player = event.getPlayer();
         OfflinePlayer referrer = event.getReferrer();
 
@@ -50,27 +52,27 @@ public class ReferralListener implements Listener {
 
     private boolean isEligible(Player player, OfflinePlayer referrer){
         boolean eligible = false;
-        boolean noPermission = ReferME.get().hasVault()
-                && !ReferME.get().getPermissionsManager().has(referrer,"referme.refer")
-                && !ReferME.get().getPermissionsManager().has(referrer,"referme.*")
-                && !ReferME.get().getPermissionsManager().has(referrer,"*")
+        boolean noPermission = getPlugin().hasVault()
+                && !getPlugin().getPermissionsManager().has(referrer,"referme.refer")
+                && !getPlugin().getPermissionsManager().has(referrer,"referme.*")
+                && !getPlugin().getPermissionsManager().has(referrer,"*")
                 && !referrer.isOp();
 
-        StorageMap<UUID,PlayerStorage> players  = ReferME.get().getStorage().getPlayers();
+        StorageMap<UUID,PlayerStorage> players  = getPlugin().getStorage().getPlayers();
 
         if(players.getRaw().get(player.getUniqueId()).isReferred()){
-            player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"You have already been referred");
+            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"You have already been referred");
         }
         else if(player.getUniqueId().equals(players.getRaw().get(referrer.getUniqueId()).getReferrer())){
-            player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"You can't refer someone who referred you");
+            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"You can't refer someone who referred you");
         }
         else if(toHours(player.getStatistic(Statistic.PLAY_ONE_TICK))
-                <ReferME.get().getConfig().getHourRequirement()){
-            player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"You must play for a total of " +
-                    ReferME.get().getConfig().getHourRequirement()+"hrs or more before having the ability to refer others");
+                <getPlugin().getConfig().getHourRequirement()){
+            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"You must play for a total of " +
+                    getPlugin().getConfig().getHourRequirement()+"hrs or more before having the ability to refer others");
         }
         else if(noPermission){
-            player.sendMessage(ReferME.get().getConfig().getPrefix()+ChatColor.RED+"That player doesn't have permission " +
+            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"That player doesn't have permission " +
                     "to refer players on this system");
         }
         else{
@@ -81,15 +83,15 @@ public class ReferralListener implements Listener {
     }
 
     private void reward(Player player, OfflinePlayer referrer){
-        PlayerStorage referrerStorage = ReferME.get().getStorage().getPlayers().getRaw().get(referrer.getUniqueId());
+        PlayerStorage referrerStorage = getPlugin().getStorage().getPlayers().getRaw().get(referrer.getUniqueId());
         //prepare commands and run
-        ReferME.get().getConfig().getRewardCommands().stream()
+        getPlugin().getConfig().getRewardCommands().stream()
                 .map(cmd -> cmd.replaceAll("%player%",player.getName()))
                 .map(cmd -> cmd.replaceAll("%referrer%",referrer.getName()))
                 .forEach(cmd -> Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), cmd));
         //hit a milestone?
         if(isAchievement(referrerStorage)){
-            ReferME.get().getConfig().getAchievements().get(referrerStorage.getReferrals()+1)
+            getPlugin().getConfig().getAchievements().get(referrerStorage.getReferrals()+1)
                     .stream()
                     .map(cmd -> cmd.replaceAll("%player%",referrer.getName()))
                     .forEach(cmd -> Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),cmd));
@@ -97,7 +99,7 @@ public class ReferralListener implements Listener {
     }
 
     private boolean isAchievement(PlayerStorage playerStorage){
-        return ReferME.get().getConfig().getAchievements().keySet().contains(playerStorage.getReferrals()+1);
+        return getPlugin().getConfig().getAchievements().keySet().contains(playerStorage.getReferrals()+1);
     }
 
     private double toHours(int ticks){

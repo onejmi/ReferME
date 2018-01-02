@@ -20,13 +20,18 @@ import java.util.List;
 public final class Loader extends JavaPlugin{
 
     private Watcher watcher;
+    private ReferME plugin;
 
     public void onEnable(){
+        //init referme class
+        this.plugin = new ReferME();
+        //log
         getLogger().info("This is a snapshot! It's currently not ready for server environments.");
+        //registering components...
         registerCommands();
         registerListeners();
         registerClickHandlers();
-        this.watcher = new Watcher(getDataFolder().getPath());
+        this.watcher = new Watcher(plugin,getDataFolder().getPath());
         watcher.start();
     }
 
@@ -35,32 +40,32 @@ public final class Loader extends JavaPlugin{
         //terminate watcher
         watcher.close();
         //save storage from memory
-        ReferME.get().getJsonStorage().write(ReferME.get().getStorage());
+        plugin.getJsonStorage().write(plugin.getStorage());
     }
 
     private void registerCommands(){
-        getCommand("referme").setExecutor(new BaseCommand());
-        List<SubCommand> subCommands = ReferME.get().getCommands();
-        subCommands.add(new HelpCmd());
-        subCommands.add(new CodeCmd());
-        subCommands.add(new ReferCmd());
-        subCommands.add(new ReloadCmd());
-        subCommands.add(new ReferralsCmd());
+        getCommand("referme").setExecutor(new BaseCommand(plugin));
+        List<SubCommand> subCommands = plugin.getCommands();
+        subCommands.add(new HelpCmd(plugin));
+        subCommands.add(new CodeCmd(plugin));
+        subCommands.add(new ReferCmd(plugin));
+        subCommands.add(new ReloadCmd(plugin));
+        subCommands.add(new ReferralsCmd(plugin));
     }
 
     private void registerListeners(){
         //plugin manager to register events
         PluginManager pluginManager = getServer().getPluginManager();
         //register...
-        pluginManager.registerEvents(new JoinListener(),this);
-        pluginManager.registerEvents(new ReferralListener(), this);
-        pluginManager.registerEvents(new ClickListener(), this);
+        pluginManager.registerEvents(new JoinListener(plugin),this);
+        pluginManager.registerEvents(new ReferralListener(plugin), this);
+        pluginManager.registerEvents(new ClickListener(plugin), this);
 
     }
 
     private void registerClickHandlers(){
-        List<ClickHandler> handlers = ReferME.get().getClickHandlers();
-        handlers.add(new RBButton());
-        handlers.add(new RNButton());
+        List<ClickHandler> handlers = plugin.getClickHandlers();
+        handlers.add(new RBButton(plugin));
+        handlers.add(new RNButton(plugin));
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class ReferralsCmd extends SubCommand{
 
-    public ReferralsCmd(){
-        super("referrals","referme.referrals",true);
+    public ReferralsCmd(ReferME plugin){
+        super(plugin,"referrals","referme.referrals",true);
     }
 
     @Override
@@ -21,7 +21,8 @@ public class ReferralsCmd extends SubCommand{
         Player player = (Player) sender;
 
         player.openInventory(new Referrals(
-                ReferME.get().getStorage().getPlayers().getRaw().get(player.getUniqueId()),
+                getPlugin(),
+                getPlugin().getStorage().getPlayers().getRaw().get(player.getUniqueId()),
                 1
         ).getResult());
     }
