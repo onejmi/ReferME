@@ -2,6 +2,7 @@ package io.github.scarger.referme.storage.watch;
 
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.framework.PluginInjected;
+import org.bukkit.Bukkit;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,13 +26,13 @@ public class WatchLoop extends PluginInjected implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Watcher thread is now starting.");
+        Bukkit.getLogger().info("Watcher thread is now starting.");
         WatchKey key;
 
         try (WatchService service = path.getFileSystem().newWatchService()) {
             //register the path for a certain event so the watcher will watch for it
             path.register(service, ENTRY_MODIFY, ENTRY_DELETE);
-            System.out.println("DEBUG: "+path.toString());
+            Bukkit.getLogger().info("DEBUG: "+path.toString());
             while (true) {
                 try {
                     if (getPlugin().getConfig().isAutoChange()) {
@@ -42,7 +43,7 @@ public class WatchLoop extends PluginInjected implements Runnable {
                             // Get the type of the event
                             kind = watchEvent.kind();
                             if (ENTRY_MODIFY == kind || ENTRY_DELETE == kind) {
-                                System.out.println("Change found, reloading...");
+                                Bukkit.getLogger().info("Change found, reloading...");
                                 getPlugin().initStorage();
                             }
                         }
@@ -54,7 +55,7 @@ public class WatchLoop extends PluginInjected implements Runnable {
                     Thread.sleep(5000);
                 }
                 catch (InterruptedException e){
-                    System.out.println("Terminating Watcher Thread");
+                    Bukkit.getLogger().info("Terminating watcher thread");
                     break;
                 }
             }

@@ -1,0 +1,5 @@
+# ignore file, no trash plz
+.idea/
+build/tmp/compileJava/
+
+

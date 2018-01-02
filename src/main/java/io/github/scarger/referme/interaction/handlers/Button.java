@@ -1,5 +1,6 @@
 package io.github.scarger.referme.interaction.handlers;
 
+import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.interaction.ClickHandler;
 import io.github.scarger.referme.interaction.MenuType;
 import org.bukkit.entity.Player;
@@ -10,8 +11,8 @@ import org.bukkit.inventory.Inventory;
  */
 public class Button extends ClickHandler {
 
-    public Button(MenuType type, int slot) {
-        super(type, slot);
+    public Button(ReferME plugin, MenuType type, int slot) {
+        super(plugin, type, slot);
     }
 
     @Override
