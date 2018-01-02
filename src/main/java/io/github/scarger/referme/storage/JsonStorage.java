@@ -79,8 +79,12 @@ public class JsonStorage {
                 }
             }
             else if(storageClass.isAssignableFrom(ConfigurationStorage.class)){
-                getStorage().write(MessageDefault
-                        .updateMessageStructure((ConfigurationStorage) getStorageSection()));
+                ConfigurationStorage config = (ConfigurationStorage) getStorageSection();
+                ConfigurationStorage updatedConfig = MessageDefault.updateMessageStructure(config);
+                //update disk copy if necessary
+                if(!(config.getMessages().equals(updatedConfig.getMessages()))){
+                    getStorage().write(updatedConfig);
+                }
             }
         }
 
