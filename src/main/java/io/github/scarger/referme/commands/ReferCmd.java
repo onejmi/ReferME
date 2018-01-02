@@ -3,7 +3,6 @@ package io.github.scarger.referme.commands;
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.events.ReferralEvent;
 import io.github.scarger.referme.storage.PlayerStorage;
-import io.github.scarger.referme.util.Const;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

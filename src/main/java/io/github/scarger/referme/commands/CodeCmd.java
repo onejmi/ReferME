@@ -1,7 +1,6 @@
 package io.github.scarger.referme.commands;
 
 import io.github.scarger.referme.ReferME;
-import io.github.scarger.referme.util.Const;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
