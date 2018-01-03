@@ -1,5 +1,6 @@
 package io.github.scarger.referme.message;
 
+import com.google.gson.Gson;
 import io.github.scarger.referme.storage.ConfigurationStorage;
 import org.bukkit.ChatColor;
 
@@ -17,7 +18,7 @@ public enum MessageDefault {
     INCORRECT_COMMAND("incorrect-command","Not quite? Use /referme help"),
     HELP_USAGE("help-usage","/referme help"),
     GRABBING_ID("grab-id","Grabbing..."),
-    SHOW_ID("show-id","Your ID number is: " + ChatColor.GREEN + "%id");
+    SHOW_ID("show-id","Your ID number is: " + ChatColor.GREEN + "%id%");
 
     private String key;
     private String value;
@@ -35,8 +36,11 @@ public enum MessageDefault {
         return value;
     }
 
-    public static ConfigurationStorage updateMessageStructure(ConfigurationStorage config){
+    public static ConfigurationStorage updateMessageStructure(ConfigurationStorage config, Gson gsonInstance){
         Set<Map.Entry<String,String>> entries = config.getMessages().entrySet();
+        //create a clone
+        ConfigurationStorage updatedConfig =
+                gsonInstance.fromJson(gsonInstance.toJson(config,ConfigurationStorage.class),ConfigurationStorage.class);
         //check if configuration needs updating
         Arrays.stream(values()).forEach(def -> {
                     if(!(entries.stream().map(Map.Entry::getKey)
@@ -45,12 +49,12 @@ public enum MessageDefault {
                                             .map(MessageDefault::getKey)
                                             .collect(Collectors.toList()).contains(entry)))
                             .collect(Collectors.toList())
-                            .contains(def.getKey()))) config.getMessages().put(def.getKey(),def.getValue());
+                            .contains(def.getKey()))) updatedConfig.getMessages().put(def.getKey(),def.getValue());
 
                 }
 
         );
         //save updated message section to disk
-        return config;
+        return updatedConfig;
     }
 }

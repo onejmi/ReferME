@@ -23,7 +23,7 @@ public class CodeCmd extends SubCommand {
         sender.sendMessage(getPlugin().getConfig().getPrefix()+getPlugin().getConfig().getMessages().get("grab-id"));
         sender.sendMessage(getPlugin().getConfig().getPrefix()+
                 getPlugin().getConfig().getMessages().get("show-id")
-                        .replace("%id",Integer.toString(getId(sender))));
+                        .replace("%id%",Integer.toString(getId(sender))));
     }
 
     @Override

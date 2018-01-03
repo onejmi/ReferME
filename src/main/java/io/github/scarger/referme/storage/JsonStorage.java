@@ -80,9 +80,11 @@ public class JsonStorage {
             }
             else if(storageClass.isAssignableFrom(ConfigurationStorage.class)){
                 ConfigurationStorage config = (ConfigurationStorage) getStorageSection();
-                ConfigurationStorage updatedConfig = MessageDefault.updateMessageStructure(config);
+                ConfigurationStorage updatedConfig =
+                        MessageDefault.updateMessageStructure(config,getStorage().gsonInstance);
                 //update disk copy if necessary
-                if(!(config.getMessages().equals(updatedConfig.getMessages()))){
+                boolean hasChange = !(config.getMessages().keySet().equals(updatedConfig.getMessages().keySet()));
+                if(hasChange){
                     getStorage().write(updatedConfig);
                 }
             }
