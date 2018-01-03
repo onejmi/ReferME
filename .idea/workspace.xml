@@ -38,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JsonStorage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JsonStorage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/storage/JsonStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="86" column="17" lean-forward="true" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
+            <state relative-caret-position="303">
+              <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,11 +50,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageDefault.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BaseCommand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/BaseCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="470">
+              <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CodeCmd.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/CodeCmd.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="22" column="113" lean-forward="false" selection-start-line="22" selection-start-column="113" selection-end-line="22" selection-end-column="113" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageDefault.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/message/MessageDefault.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+            <state relative-caret-position="318">
+              <caret line="19" column="71" lean-forward="true" selection-start-line="19" selection-start-column="71" selection-end-line="19" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,26 +105,6 @@
                 <element signature="e#711#712#0" expanded="true" />
                 <element signature="e#787#788#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CodeCmd.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/CodeCmd.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReferralsCmd.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/ReferralsCmd.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -564,14 +568,14 @@
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/message/MessageDefaults.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/storage/ConfigurationStorage.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/ReferME.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/message/MessageDefault.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/util/Const.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/util/create/ItemStackBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/Loader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/BaseCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/ReferCmd.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/CodeCmd.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/storage/JsonStorage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/BaseCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/message/MessageDefault.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/CodeCmd.java" />
       </list>
     </option>
   </component>
@@ -1447,14 +1451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/BaseCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-389">
-          <caret line="3" column="58" lean-forward="false" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/util/ItemStackBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
@@ -1467,14 +1463,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
           <caret line="4" column="55" lean-forward="false" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/CodeCmd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="2" column="41" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1538,20 +1526,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/message/MessageDefault.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/storage/JsonStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        <state relative-caret-position="303">
+          <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/storage/JsonStorage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/BaseCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="86" column="17" lean-forward="true" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
+        <state relative-caret-position="470">
+          <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/commands/CodeCmd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="22" column="113" lean-forward="false" selection-start-line="22" selection-start-column="113" selection-end-line="22" selection-end-column="113" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/scarger/referme/message/MessageDefault.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="19" column="71" lean-forward="true" selection-start-line="19" selection-start-column="71" selection-end-line="19" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

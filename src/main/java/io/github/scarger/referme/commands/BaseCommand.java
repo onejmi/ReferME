@@ -2,6 +2,7 @@ package io.github.scarger.referme.commands;
 
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.framework.PluginInjected;
+import io.github.scarger.referme.message.MessageDefault;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -34,11 +35,13 @@ public class BaseCommand extends PluginInjected implements CommandExecutor{
                     }
                 }
                 if(!hasCommand){
-                    commandSender.sendMessage(getPlugin().getConfig().getPrefix()+"Not quite? Use /referme help");
+                    commandSender.sendMessage(getPlugin().getConfig().getPrefix()+
+                            getPlugin().getConfig().getMessages().get("incorrect-command"));
                 }
             }
             else{
-                commandSender.sendMessage(getPlugin().getConfig().getPrefix()+"/referme help");
+                commandSender.sendMessage(getPlugin().getConfig().getPrefix()+
+                        getPlugin().getConfig().getMessages().get("help-usage"));
             }
         }
 

@@ -13,7 +13,11 @@ import java.util.stream.Collectors;
  */
 public enum MessageDefault {
 
-    NO_PERMS("no-permission", ChatColor.RED+"Insufficient permission");
+    NO_PERMS("no-permission", ChatColor.RED+"Insufficient permission"),
+    INCORRECT_COMMAND("incorrect-command","Not quite? Use /referme help"),
+    HELP_USAGE("help-usage","/referme help"),
+    GRABBING_ID("grab-id","Grabbing..."),
+    SHOW_ID("show-id","Your ID number is: " + ChatColor.GREEN + "%id");
 
     private String key;
     private String value;

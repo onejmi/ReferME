@@ -20,8 +20,10 @@ public class CodeCmd extends SubCommand {
 
     @Override
     void run(CommandSender sender, List<String> args) {
-        sender.sendMessage(getPlugin().getConfig().getPrefix()+" Grabbing...");
-        sender.sendMessage(getPlugin().getConfig().getPrefix()+"Your ID number is: " + ChatColor.GREEN + getId(sender));
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+getPlugin().getConfig().getMessages().get("grab-id"));
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                getPlugin().getConfig().getMessages().get("show-id")
+                        .replace("%id",Integer.toString(getId(sender))));
     }
 
     @Override
