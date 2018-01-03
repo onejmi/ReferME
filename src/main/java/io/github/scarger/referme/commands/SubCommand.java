@@ -44,7 +44,8 @@ public abstract class SubCommand extends PluginInjected{
 
     public void runCmd(CommandSender sender, String[] fullArgs){
         if(onlyPlayer && !(sender instanceof Player)){
-            sender.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"Sorry! only players can do that.");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("players-only"));
         }
         else{
             if((args.size()!=(fullArgs.length-1)) && argLimit){

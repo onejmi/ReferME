@@ -15,6 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,6 +30,8 @@ public class ReferralListener extends PluginInjected implements Listener{
     @EventHandler (priority = EventPriority.LOWEST) //make sure users of api can override what's done here
     public void onReferral(ReferralEvent event){
         final String PREFIX = getPlugin().getConfig().getPrefix();
+        final Map<String,String> messages = getPlugin().getConfig().getMessages();
+        //players involved in referral
         Player player = event.getPlayer();
         OfflinePlayer referrer = event.getReferrer();
 
@@ -37,12 +40,11 @@ public class ReferralListener extends PluginInjected implements Listener{
             return;
         }
 
-        player.sendMessage(PREFIX+ChatColor.GREEN+"You have selected " +
-            referrer.getName()+" as your referrer");
+        player.sendMessage(PREFIX+messages.get("select-referral").replace("%referrer%",referrer.getName()));
 
         if(referrer.isOnline()){
-            ((Player) referrer).sendMessage(PREFIX+ChatColor.LIGHT_PURPLE+player.getName()+ChatColor.AQUA +
-                    " has added you as their referral, congrats!");
+            ((Player) referrer).sendMessage(PREFIX+messages.get("referral-added")
+                    .replace("%player%",player.getName()));
 
         }
 
@@ -61,19 +63,25 @@ public class ReferralListener extends PluginInjected implements Listener{
         StorageMap<UUID,PlayerStorage> players  = getPlugin().getStorage().getPlayers();
 
         if(players.getRaw().get(player.getUniqueId()).isReferred()){
-            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"You have already been referred");
+            //already referred
+            player.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("already-referred"));
         }
         else if(player.getUniqueId().equals(players.getRaw().get(referrer.getUniqueId()).getReferrer())){
-            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"You can't refer someone who referred you");
+            //cross referring
+            player.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("cross-referral"));
         }
         else if(toHours(player.getStatistic(Statistic.PLAY_ONE_TICK))
                 <getPlugin().getConfig().getHourRequirement()){
-            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"You must play for a total of " +
-                    getPlugin().getConfig().getHourRequirement()+"hrs or more before having the ability to refer others");
+            //not enough time
+            player.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("require-playtime")
+                            .replace("%time_requirement%", Integer.toString(getPlugin().getConfig().getHourRequirement())));
         }
         else if(noPermission){
-            player.sendMessage(getPlugin().getConfig().getPrefix()+ChatColor.RED+"That player doesn't have permission " +
-                    "to refer players on this system");
+            player.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("referral-no-permission"));
         }
         else{
             eligible = true;

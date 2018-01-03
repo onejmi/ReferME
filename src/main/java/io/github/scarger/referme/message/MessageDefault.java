@@ -18,7 +18,22 @@ public enum MessageDefault {
     INCORRECT_COMMAND("incorrect-command","Not quite? Use /referme help"),
     HELP_USAGE("help-usage","/referme help"),
     GRABBING_ID("grab-id","Grabbing..."),
-    SHOW_ID("show-id","Your ID number is: " + ChatColor.GREEN + "%id%");
+    SHOW_ID("show-id","Your ID number is: " + ChatColor.GREEN + "%id%"),
+    INCORRECT_ID("incorrect-id",ChatColor.RED+"That id doesn't exist"),
+    SELF_REFERRAL("self-referral",ChatColor.RED+"You can't refer yourself!"),
+    INVALID_HELP_PAGE("invalid-help-page",ChatColor.RED+"That page number is invalid, showing default..."),
+    RELOADING("reloading","Reloading..."),
+    RELOAD_SUCCESS("reload-success",ChatColor.GREEN+"Successfully reloaded plugin"),
+    PLAYERS_ONLY("players-only",ChatColor.RED+"Sorry! only players can do that."),
+    SELECT_REFERRAL("select-referral",ChatColor.GREEN+"You have selected %referrer% as your referrer"),
+    REFERRAL_ADDED("referral-added",ChatColor.LIGHT_PURPLE+"%player%"+ChatColor.AQUA +
+            " has added you as their referral, congrats!"),
+    ALREADY_REFERRED("already-referred",ChatColor.RED+"You have already been referred"),
+    CROSS_REFERRAL("cross-referral",ChatColor.RED+"You can't refer someone who referred you"),
+    REQUIRE_PLAYTIME("require-playtime",ChatColor.RED+"You must play for a total of %time_requirement% hrs " +
+            "or more before having the ability to refer others"),
+    REFERRAL_NO_PERMISSION("referral-no-permission",ChatColor.RED+"That player doesn't have permission " +
+            "to refer players on this system");
 
     private String key;
     private String value;

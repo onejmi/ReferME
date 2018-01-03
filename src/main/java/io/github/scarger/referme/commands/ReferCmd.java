@@ -37,7 +37,8 @@ public class ReferCmd extends SubCommand {
                             .filter(p -> p.getId()==idCode).reduce((s,s2) -> s2).get());
         }
         else{
-            sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"You can't refer yourself!");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("self-referral"));
         }
 
     }
@@ -53,7 +54,8 @@ public class ReferCmd extends SubCommand {
         UUID referralUUID = playerStorage.getUUID();
 
         if(referralUUID == null){
-            sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"That id doesn't exist");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("incorrect-id"));
             return;
         }
 

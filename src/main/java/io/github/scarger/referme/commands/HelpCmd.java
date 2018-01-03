@@ -29,7 +29,7 @@ public class HelpCmd extends SubCommand {
                 }
             }
             catch (NumberFormatException e){
-                sender.sendMessage(ChatColor.RED+"That page number is invalid, showing default...");
+                sender.sendMessage(getPlugin().getConfig().getMessages().get("invalid-help-page"));
             }
         }
         //show page

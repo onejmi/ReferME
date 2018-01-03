@@ -16,9 +16,11 @@ public class ReloadCmd extends SubCommand {
 
     @Override
     void run(CommandSender sender, List<String> args) {
-        sender.sendMessage(getPlugin().getConfig().getPrefix()+"Reloading...");
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                getPlugin().getConfig().getMessages().get("reloading"));
         getPlugin().initStorage();
-        sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.GREEN+"Successfully reloaded plugin");
+        sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                getPlugin().getConfig().getMessages().get("reload-success"));
     }
 
     @Override
