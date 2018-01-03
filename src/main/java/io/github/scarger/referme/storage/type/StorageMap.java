@@ -1,5 +1,6 @@
 package io.github.scarger.referme.storage.type;
 
+import com.google.gson.annotations.Expose;
 import io.github.scarger.referme.ReferME;
 import io.github.scarger.referme.framework.PluginInjected;
 
@@ -9,12 +10,20 @@ import java.util.Map;
 /**
  * Created by Synch on 2017-11-05.
  */
-public class StorageMap<K,V> extends PluginInjected{
+public class StorageMap<K,V> extends PluginInjected.Serialized{
+    @Expose
     private Map<K,V> rawMap;
 
-    public StorageMap(ReferME plugin){
-        super(plugin);
+    private transient ReferME plugin;
+
+    public StorageMap(){
         rawMap = new HashMap<>();
+    }
+
+    @Override
+    public void inject(ReferME plugin) {
+        this.plugin = plugin;
+        rawMap.values().forEach(v -> ((PluginInjected.Serialized) v).inject(plugin));
     }
 
     public Map<K,V> getRaw(){
@@ -32,6 +41,6 @@ public class StorageMap<K,V> extends PluginInjected{
     }
 
     private void save(){
-        getPlugin().getJsonStorage().write(getPlugin().getStorage());
+        plugin.getJsonStorage().write(plugin.getStorage());
     }
 }

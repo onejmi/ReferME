@@ -1,5 +1,6 @@
 package io.github.scarger.referme.storage;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.Since;
 import io.github.scarger.referme.message.MessageDefault;
 import io.github.scarger.referme.storage.type.JsonSerializable;
@@ -11,13 +12,13 @@ import java.util.*;
  * Created by Synch on 2017-11-01.
  */
 public final class ConfigurationStorage implements JsonSerializable{
-    private @Since(1.0) String prefix;
-    private @Since(1.0) boolean autoChange;
-    private @Since(1.0) int hourRequirement;
+    private @Expose @Since(1.0) String prefix;
+    private @Expose @Since(1.0) boolean autoChange;
+    private @Expose @Since(1.0) int hourRequirement;
 
-    private @Since(1.0) List<String> rewardCommands;
-    private @Since(1.0) Map<Integer,List<String>> achievements;
-    private @Since(1.0) Map<String,String> messages;
+    private @Expose @Since(1.0) List<String> rewardCommands;
+    private @Expose @Since(1.0) Map<Integer,List<String>> achievements;
+    private @Expose @Since(1.0) Map<String,String> messages;
 
     public ConfigurationStorage(){
         final String[] DEFAULT_COMMANDS = {"me welcome %player%!", "me %referrer% gj for bringing %player%", "give %player% diamond"};

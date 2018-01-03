@@ -23,7 +23,10 @@ public class JsonStorage {
 
     JsonStorage(File output){
         this.output = output;
-        this.gsonInstance = new GsonBuilder().setVersion(1.0).setPrettyPrinting().create();
+        this.gsonInstance = new GsonBuilder().setVersion(1.0)
+                .excludeFieldsWithoutExposeAnnotation()
+                .setPrettyPrinting()
+                .create();
     }
 
     public synchronized boolean write(Object data){
@@ -67,13 +70,7 @@ public class JsonStorage {
         private void populate(){
             if(file.length()==0){
                 try {
-                    if(storageClass.isAssignableFrom(Storage.class)){
-                        Constructor<Storage> storageConstructor = Storage.class.getConstructor(ReferME.class);
-                        storage.write(storageConstructor.newInstance(getPlugin()));
-                    }
-                    else {
-                        storage.write(storageClass.newInstance());
-                    }
+                    storage.write(storageClass.newInstance());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

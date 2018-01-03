@@ -45,9 +45,9 @@ public enum MessageDefault {
         Arrays.stream(values()).forEach(def -> {
                     if(!(entries.stream().map(Map.Entry::getKey)
                             .filter(entry ->
-                                    !(Arrays.stream(values())
+                                    Arrays.stream(values())
                                             .map(MessageDefault::getKey)
-                                            .collect(Collectors.toList()).contains(entry)))
+                                            .collect(Collectors.toList()).contains(entry))
                             .collect(Collectors.toList())
                             .contains(def.getKey()))) updatedConfig.getMessages().put(def.getKey(),def.getValue());
 

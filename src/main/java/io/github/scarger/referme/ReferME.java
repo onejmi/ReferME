@@ -64,6 +64,8 @@ public class ReferME {
         //deserialize info...
         storage = (Storage) jsonStorage.getStorageSection();
         configurationStorage = (ConfigurationStorage) jsonConfiguration.getStorageSection();
+        //inject plugin for serializable class storage
+        storage.inject(this);
     }
 
     public JsonStorage getJsonStorage() {

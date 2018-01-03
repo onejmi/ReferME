@@ -32,7 +32,9 @@ public class ReferCmd extends SubCommand {
         }
 
         if(getPlugin().getStorage().getPlayers().getRaw().get(((Player) sender).getUniqueId()).getId() != idCode){
-            tryReferral(sender, getPlugin().getStorage().getPlayers().getRaw().get((Player) sender));
+            tryReferral(sender,
+                    getPlugin().getStorage().getPlayers().getRaw().values().stream()
+                            .filter(p -> p.getId()==idCode).reduce((s,s2) -> s2).get());
         }
         else{
             sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"You can't refer yourself!");

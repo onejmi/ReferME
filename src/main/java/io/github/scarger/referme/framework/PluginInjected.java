@@ -1,5 +1,6 @@
 package io.github.scarger.referme.framework;
 
+import com.google.gson.annotations.Expose;
 import io.github.scarger.referme.ReferME;
 
 /**
@@ -17,4 +18,12 @@ public abstract class PluginInjected {
     public ReferME getPlugin(){
         return plugin;
     }
+
+
+    public static abstract class Serialized {
+        /*Method used to inject plugin to serializable classes
+        * (since the constructor isn't called)*/
+        public abstract void inject(ReferME plugin);
+    }
+
 }

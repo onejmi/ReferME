@@ -22,9 +22,11 @@ public class JoinListener extends PluginInjected implements Listener {
         final Storage storage = getPlugin().getStorage();
 
         if(!(storage.getPlayers().getRaw().keySet().contains(event.getPlayer().getUniqueId()))){
-            //add player to storage
-            storage.getPlayers()
-                    .put(event.getPlayer().getUniqueId(),new PlayerStorage(getPlugin(),storage.generateId()));
+            //add player(with plugin injected) to storage
+            PlayerStorage newPlayer = new PlayerStorage(storage.generateId());
+            newPlayer.inject(getPlugin());
+            //add to cache/storage..
+            storage.getPlayers().put(event.getPlayer().getUniqueId(),newPlayer);
         }
     }
 }
