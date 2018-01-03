@@ -20,6 +20,7 @@ public enum MessageDefault {
     GRABBING_ID("grab-id","Grabbing..."),
     SHOW_ID("show-id","Your ID number is: " + ChatColor.GREEN + "%id%"),
     INCORRECT_ID("incorrect-id",ChatColor.RED+"That id doesn't exist"),
+    INVALID_NUMBER("invalid-number",ChatColor.RED+"Please specify a valid integer as the id"),
     SELF_REFERRAL("self-referral",ChatColor.RED+"You can't refer yourself!"),
     INVALID_HELP_PAGE("invalid-help-page",ChatColor.RED+"That page number is invalid, showing default..."),
     RELOADING("reloading","Reloading..."),

@@ -27,14 +27,15 @@ public class ReferCmd extends SubCommand {
             idCode = Integer.parseInt(args.get(0));
         }
         catch (NumberFormatException e){
-            sender.sendMessage(getPlugin().getConfig().getPrefix()+ ChatColor.RED+"Please specify a valid integer as the id");
+            sender.sendMessage(getPlugin().getConfig().getPrefix()+
+                    getPlugin().getConfig().getMessages().get("invalid-number"));
             return;
         }
 
         if(getPlugin().getStorage().getPlayers().getRaw().get(((Player) sender).getUniqueId()).getId() != idCode){
             tryReferral(sender,
                     getPlugin().getStorage().getPlayers().getRaw().values().stream()
-                            .filter(p -> p.getId()==idCode).reduce((s,s2) -> s2).get());
+                            .filter(p -> p.getId()==idCode).reduce((s,s2) -> s2).orElse(null));
         }
         else{
             sender.sendMessage(getPlugin().getConfig().getPrefix()+
@@ -51,14 +52,14 @@ public class ReferCmd extends SubCommand {
 
     private void tryReferral(CommandSender sender, PlayerStorage playerStorage){
         Player player = (Player) sender;
-        UUID referralUUID = playerStorage.getUUID();
 
-        if(referralUUID == null){
+        if(playerStorage == null || playerStorage.getUUID() == null){
             sender.sendMessage(getPlugin().getConfig().getPrefix()+
                     getPlugin().getConfig().getMessages().get("incorrect-id"));
             return;
         }
-
+        //call event w/ UUID
+        UUID referralUUID = playerStorage.getUUID();
         ReferralEvent referralEvent = new ReferralEvent((Player) sender, Bukkit.getOfflinePlayer(referralUUID));
 
         //call the referral event
